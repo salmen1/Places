@@ -18,6 +18,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.ciklum.testing.places.R;
 import com.ciklum.testing.places.component.data.Place;
@@ -236,14 +238,18 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
     }
 
 
-
-    /**
-     * Call user when click by button home
-     * @param view in layout
-     */
-    public void onHome(View view) {
-        onBackPressed();
-    }
+//    private void  addPlacesToMap(ArrayList<Place> places) {
+//        if(mMapView!=null) {
+//            mMapView.clear();
+//            if (places != null) {
+//                for (Place place : places) {
+//                    mMapView.addMarker(new MarkerOptions()
+//                            .position(new LatLng(place.getLocation().getLatitude(), place.getLocation().getLongitude()))
+//                            .draggable(false));
+//                }
+//            }
+//        }
+//    }
 
     /**
      * Call user when click by button search
