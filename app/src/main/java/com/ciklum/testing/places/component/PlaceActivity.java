@@ -102,8 +102,7 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
     private boolean mSkipAnimationToMyLocation = false;
 
     private Button mSearchButton;
-    private TextView mCityTextView;
-    private TextView mZipTextView;
+    private TextView mKeyWordTextView;
     private AutoFitRecyclerView mRecycleView;
     private RadioGroup mRadiusRadioGroupView;
     private View mProgressView;
@@ -185,44 +184,25 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
     }
 
     private void initEditWidgets(){
-        mCityTextView                = (TextView)findViewById(R.id.edit_text_city);
-        mZipTextView                 = (TextView)findViewById(R.id.edit_text_zip);
+        mKeyWordTextView = (TextView)findViewById(R.id.edit_text_keyword);
 
-        final View clearCityView = findViewById(R.id.clear_city_view);
-        final View clearZipView = findViewById(R.id.clear_zip_view);
+        final View clearKeyWordView = findViewById(R.id.clear_keyword_view);
 
-        clearCityView.setOnClickListener(new View.OnClickListener() {
+
+        clearKeyWordView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCityTextView.setText("");
+                mKeyWordTextView.setText("");
             }
         });
 
-        mCityTextView.addTextChangedListener(new SimpleTextWatcher() {
+        mKeyWordTextView.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 0 && clearCityView.getVisibility() != View.VISIBLE) {
-                    clearCityView.setVisibility(View.VISIBLE);
-                } else if (s.length() == 0 && clearCityView.getVisibility() == View.VISIBLE) {
-                    clearCityView.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-
-        clearZipView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mZipTextView.setText("");
-            }
-        });
-
-        mZipTextView.addTextChangedListener(new SimpleTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 0 && clearZipView.getVisibility() != View.VISIBLE) {
-                    clearZipView.setVisibility(View.VISIBLE);
-                } else if (s.length() == 0 && clearZipView.getVisibility() == View.VISIBLE) {
-                    clearZipView.setVisibility(View.INVISIBLE);
+                if (s.length() > 0 && clearKeyWordView.getVisibility() != View.VISIBLE) {
+                    clearKeyWordView.setVisibility(View.VISIBLE);
+                } else if (s.length() == 0 && clearKeyWordView.getVisibility() == View.VISIBLE) {
+                    clearKeyWordView.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -276,14 +256,9 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
         hideInfoMessage();
 
         Double radius = Double.valueOf(((RadioButton) mRadiusRadioGroupView.findViewById(mRadiusRadioGroupView.getCheckedRadioButtonId())).getText().toString());
-        //"12305"
-        String zipCode = mZipTextView.getText().toString();
-        //Berlin
-        String city = mCityTextView.getText().toString();
+        String keyWord = mKeyWordTextView.getText().toString();
 
-        mZipTextView.clearFocus();
-        mCityTextView.clearFocus();
-
+        mKeyWordTextView.clearFocus();
     }
 
     /**
@@ -294,9 +269,6 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
         mSkipAnimationToMyLocation = false;
         if (mCurrentLocation != null) {
             animateToMyPosition();
-            if(mAddress!=null) {
-                mCityTextView.setText(mAddress.getLocality());
-            }
         } else {
             showLocationWarningDialogIfNeed();
         }
@@ -539,16 +511,6 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
         public void onResult(Address address) {
             mAddress = address;
             if(mAddress!=null) {
-                String cityValue = mCityTextView.getText().toString();
-                if (cityValue.isEmpty()) {
-                    if (!mCityTextView.isInEditMode() && !mCityTextView.isInputMethodTarget()) {
-                        mCityTextView.setText(mAddress.getLocality());
-                    }
-                    String postalCode = mAddress.getPostalCode();
-                    if (!mZipTextView.isInEditMode() && postalCode != null && !postalCode.isEmpty()) {
-                        mZipTextView.setText(postalCode);
-                    }
-                }
                 if(mGoogleApiClient!=null && mGoogleApiClient.isConnected()) {
                     stopLocationUpdates();
                 }

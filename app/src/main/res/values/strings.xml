@@ -3,11 +3,10 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="actual_position_label">Actual position</string>
-    <string name="zip_hint">ZIP</string>
-    <string name="city_hint">City</string>
+    <string name="keyword_hint">Keyword</string>
     <string name="places_search_label">Places Search</string>
     <string name="search_radius_label">Search radius</string>
-    <string name="enter_a_postcode">Enter a postcode / location:</string>
+    <string name="enter_a_keyword">Enter a keyword:</string>
     <string name="places_not_found">At your location no places were found.</string>
     <string name="no_connection">You need an internet connection, to search for nearby places.</string>
     <string name="found_places">%s found</string>
