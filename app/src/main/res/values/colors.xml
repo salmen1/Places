@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="turquoise">#ff0098a1</color>
+    <color name="turquoise_dark">#017980</color>
+    <color name="turquoise_pale">#33BEC3</color>
+    <color name="background">#ffefeff4</color>
+
+    <color name="menu_text_color_normal">#9aa9b0</color>
+    <color name="green">#97be0d</color>
+    <color name="progress_gray">#e5e7e8</color>
+
+    <color name="transparent_popup_color">#809AA9B0</color>
+    <color name="white">#ffffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">@android:color/black</color>
+    <color name="dark_gray">#ff373737</color>
+    <color name="gray">#ff9aa9b0</color>
+    <color name="border_gray">#ff9aa4b3</color>
+    <color name="light_gray">#fff3f3f3</color>
+    <color name="gray_selection">#fff9f9f9</color>
+
+    <color name="search_field_text_color">#000000</color>
+
+    <color name="ripple_effect_color">#ffccd0d2</color>
+
+</resources>

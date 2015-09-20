@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <!--Start activity values-->
+    <dimen name="progress_slider_width">150dp</dimen>
+    <dimen name="margin_vertical_logo">50dp</dimen>
+
+    <dimen name="places_menu_width">300dp</dimen>
+    <dimen name="places_map_height">350dp</dimen>
+</resources>

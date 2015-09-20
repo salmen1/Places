@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Main Panel --><!-- start -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:gravity="left"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/mainContainter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/left_panel"
+            layout="@layout/places_left_layout"
+            android:layout_width="@dimen/places_menu_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/left_panel"
+            android:background="@color/border_gray" />
+
+        <com.ciklum.testing.places.ui.AutoFitRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recycler_view"
+            android:layout_toRightOf="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:numColumns="@integer/places_num_columns"/>
+
+        <include
+            android:id="@+id/info_view"
+            layout="@layout/place_info_layout"
+            android:layout_toRightOf="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_popup_color"
+        android:visibility="gone"
+        android:id="@+id/progress_view">
+
+        <com.pnikosis.materialishprogress.ProgressWheel xmlns:wheel="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/productImageProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            wheel:matProg_barColor="@color/green"
+            wheel:matProg_progressIndeterminate="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

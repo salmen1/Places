@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="menu_item_height">48dp</dimen>
+
+    <dimen name="home_height_bottom_layout">70dp</dimen>
+    <dimen name="turquoise_button_layout_height">70dp</dimen>
+
+    <dimen name="places_menu_width">360dp</dimen>
+    <dimen name="places_map_height">200dp</dimen>
+
+</resources>

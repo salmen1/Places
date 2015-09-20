@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="menu_width">360dp</dimen>
+    <dimen name="menu_padding_vertical">15dp</dimen>
+    <item name="menu_touch_area_part" format="float" type="dimen">0.5</item>
+    <!--Start activity-->
+    <dimen name="margin_vertical_top_logo">0dp</dimen>
+
+    <!--Info  constants -->
+    <dimen name="info_text_indent">0dp</dimen>
+    <dimen name="info_checkbox_text_indent">30dp</dimen>
+    <dimen name="info_webview_margin_left">80dp</dimen>
+    <dimen name="info_title_margin_left">7dp</dimen>
+    <dimen name="info_checkbox_padding">5dp</dimen>
+
+    <dimen name="turquoise_button_margin_between">10dp</dimen>
+    <dimen name="menu_item_height">56dp</dimen>
+
+
+    <dimen name="places_inner_margin">10dp</dimen>
+    <dimen name="places_menu_width">300dp</dimen>
+    <dimen name="places_map_height">300dp</dimen>
+    <dimen name="card_view_corner_radius">2dp</dimen>
+    <dimen name="card_view_content_padding">5dp</dimen>
+    <dimen name="card_view_item_margin">5dp</dimen>
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Places</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="actual_position_label">Actual position</string>
+    <string name="zip_hint">ZIP</string>
+    <string name="city_hint">City</string>
+    <string name="places_search_label">Places Search</string>
+    <string name="search_radius_label">Search radius</string>
+    <string name="enter_a_postcode">Enter a postcode / location:</string>
+    <string name="places_not_found">At your location no places were found.</string>
+    <string name="no_connection">You need an internet connection, to search for nearby places.</string>
+    <string name="found_places">%s found</string>
+    <string name="label_10" translatable="false">10</string>
+    <string name="label_20" translatable="false">20</string>
+    <string name="label_30" translatable="false">30</string>
+    <string name="label_40" translatable="false">40</string>
+    <string name="label_50" translatable="false">50</string>
+
+    <string name="home_places_label">Places</string>
+
+</resources>
