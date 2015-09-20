@@ -14,21 +14,19 @@ import android.widget.TextView;
 final class PlaceViewHolder extends RecyclerView.ViewHolder {
 
     View itemView;
-    TextView positionTextView;
     TextView nameTextView;
     ImageView photoTextView;
 
-    TextView phoneTextView;
-    TextView emailTextView;
+    TextView distanceTextView;
+    TextView addressTextView;
 
     public PlaceViewHolder(View itemView) {
         super(itemView);
         this.itemView  = itemView;
-        positionTextView = (TextView)itemView.findViewById(R.id.contact_position);
-        nameTextView = (TextView)itemView.findViewById(R.id.contact_name);
+        nameTextView = (TextView)itemView.findViewById(R.id.place_name);
         photoTextView = (ImageView)itemView.findViewById(R.id.contact_photo);
-        phoneTextView = (TextView)itemView.findViewById(R.id.contact_phone);
-        emailTextView = (TextView)itemView.findViewById(R.id.contact_email);
+        distanceTextView = (TextView)itemView.findViewById(R.id.place_distance);
+        addressTextView = (TextView)itemView.findViewById(R.id.place_address);
 
         setIsRecyclable(false);
     }

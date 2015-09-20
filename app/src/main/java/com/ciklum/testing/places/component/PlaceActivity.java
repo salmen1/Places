@@ -20,15 +20,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.ciklum.testing.places.R;
+import com.ciklum.testing.places.component.data.Place;
 import com.ciklum.testing.places.component.location.GeocodeAsyncTask;
 import com.ciklum.testing.places.component.location.GeocodeResultListener;
 import com.ciklum.testing.places.ui.AutoFitRecyclerView;
 import com.ciklum.testing.places.utils.SimpleTextWatcher;
 
-import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.IntentSender;
-import android.content.Loader;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
 import android.location.Address;
@@ -36,22 +34,24 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * @author Alexandr Stetsko (alexandr.stetsko@innomos.com)
  */
-public class PlaceActivity extends Activity implements ConnectionCallbacks, OnConnectionFailedListener,
-        LocationListener, CompoundButton.OnCheckedChangeListener,
-        LoaderManager.LoaderCallbacks<String> {
+public class PlaceActivity extends FragmentActivity implements ConnectionCallbacks, OnConnectionFailedListener,
+        LocationListener,
+        LoaderManager.LoaderCallbacks<ArrayList<Place>> {
 
     protected static final String TAG = PlaceActivity.class.getSimpleName();
 
@@ -104,13 +104,13 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
     private Button mSearchButton;
     private TextView mKeyWordTextView;
     private AutoFitRecyclerView mRecycleView;
-    private RadioGroup mRadiusRadioGroupView;
     private View mProgressView;
     private View mInfoView;
 
 
     private Address mAddress;
     private GeocodeAsyncTask mGeocodeAsyncTask;
+    private PlaceAdapter mPlaceAdapter;
 
 
     @Override
@@ -123,7 +123,7 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
 //            finish();
 //        }
 
-        final PlaceLoader loaderPlaces= (PlaceLoader) getLoaderManager().initLoader(LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(LOADER_ID, null, this);
 
         mProgressView      = findViewById(R.id.progress_view);
         mInfoView          = findViewById(R.id.info_view);
@@ -140,9 +140,11 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
             }
         });
 
-        mRecycleView.setHasFixedSize(false);
+        mPlaceAdapter = new PlaceAdapter();
 
-        mRadiusRadioGroupView = (RadioGroup)findViewById(R.id.radius_radio_group);
+        mRecycleView.setHasFixedSize(false);
+        mRecycleView.setAdapter(mPlaceAdapter);
+
 
         final MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -211,29 +213,26 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
 
 
     @Override
-    public Loader<String> onCreateLoader(int id, Bundle args) {
-        Loader<String> loader = null;
+    public Loader<ArrayList<Place>> onCreateLoader(int id, Bundle args) {
+        Loader<ArrayList<Place>> loader = null;
         if (id == LOADER_ID) {
-            loader = new PlaceLoader(this);
+            String keyword = (mKeyWordTextView!=null && mKeyWordTextView.getText()!=null)?mKeyWordTextView.getText().toString():null;
+            loader = new PlaceLoader(getApplicationContext(), keyword, mCurrentLocation);
         }
         return loader;
     }
 
     @Override
-    public void onLoadFinished(Loader<String> loader, String data) {
-
+    public void onLoadFinished(Loader<ArrayList<Place>> loader, ArrayList<Place> data) {
+        mPlaceAdapter = new PlaceAdapter(data);
+        mPlaceAdapter.notifyDataSetChanged();
+        mRecycleView.setAdapter(mPlaceAdapter);
+        mProgressView.setVisibility(View.GONE);
     }
 
     @Override
-    public void onLoaderReset(Loader<String> loader) {
-
-    }
-
-
-
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onLoaderReset(Loader<ArrayList<Place>> loader) {
+        mProgressView.setVisibility(View.GONE);
     }
 
 
@@ -255,10 +254,15 @@ public class PlaceActivity extends Activity implements ConnectionCallbacks, OnCo
         mProgressView.setVisibility(View.VISIBLE);
         hideInfoMessage();
 
-        Double radius = Double.valueOf(((RadioButton) mRadiusRadioGroupView.findViewById(mRadiusRadioGroupView.getCheckedRadioButtonId())).getText().toString());
-        String keyWord = mKeyWordTextView.getText().toString();
+        String keyWord = mKeyWordTextView.getText()!=null?mKeyWordTextView.getText().toString():null;
 
         mKeyWordTextView.clearFocus();
+        Loader<ArrayList<Place>> loaderPlace = getSupportLoaderManager().getLoader(LOADER_ID);
+
+        mPlaceAdapter.updateData(null);
+        PlaceLoader placeLoader = (PlaceLoader) loaderPlace;
+        placeLoader.updateRequestData(keyWord, mCurrentLocation);
+        placeLoader.forceLoad();
     }
 
     /**

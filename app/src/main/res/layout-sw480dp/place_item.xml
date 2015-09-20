@@ -38,19 +38,7 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/contact_position"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|top"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:lines="2"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24_sp_dimen" />
-
-                <TextView
-                    android:id="@+id/contact_name"
+                    android:id="@+id/place_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -71,11 +59,10 @@
             android:layout_weight="2">
 
             <TextView
-                android:id="@+id/contact_email"
+                android:id="@+id/place_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:drawableLeft="@drawable/contact_info_icon_mail"
                 android:drawablePadding="5dp"
                 android:singleLine="true"
                 android:textColor="@color/turquoise"
@@ -83,12 +70,11 @@
                 android:autoLink="email"/>
 
             <TextView
-                android:id="@+id/contact_phone"
+                android:id="@+id/place_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:gravity="left"
-                android:drawableLeft="@drawable/contact_info_icon_phone"
                 android:drawablePadding="5dp"
                 android:textColor="@color/turquoise"
                 android:textSize="@dimen/text_size_18_sp_dimen"
