@@ -34,6 +34,19 @@ public final class Place implements Parcelable {
     @Element(name = Keys.GEOMETRY)
     private PlaceLocation placelocation;
 
+    private int distance;
+
+    public Place() {
+    }
+
+    public Place(String id, String name, String icon, String vicinity, PlaceLocation placelocation) {
+        this.id = id;
+        this.name = name;
+        this.icon = icon;
+        this.vicinity = vicinity;
+        this.placelocation = placelocation;
+    }
+
     public String getName() {
         return name;
     }
@@ -49,15 +62,12 @@ public final class Place implements Parcelable {
         return placelocation;
     }
 
-    public Place() {
+    public int getDistance() {
+        return distance;
     }
 
-    public Place(String id, String name, String icon, String vicinity, PlaceLocation placelocation) {
-        this.id = id;
-        this.name = name;
-        this.icon = icon;
-        this.vicinity = vicinity;
-        this.placelocation = placelocation;
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     @Override
@@ -71,6 +81,7 @@ public final class Place implements Parcelable {
         parcel.writeString(name);
         parcel.writeString(icon);
         parcel.writeString(vicinity);
+        parcel.writeInt(distance);
         parcel.writeParcelable(placelocation, flags);
     }
 
@@ -90,6 +101,7 @@ public final class Place implements Parcelable {
         name  = parcel.readString();
         icon = parcel.readString();
         vicinity = parcel.readString();
+        distance = parcel.readInt();
         placelocation = parcel.readParcelable(PlaceLocation.class.getClassLoader());
     }
 

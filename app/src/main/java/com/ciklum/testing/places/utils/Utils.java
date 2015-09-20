@@ -3,12 +3,15 @@ package com.ciklum.testing.places.utils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.TypedValue;
@@ -80,6 +83,23 @@ public final class Utils {
             GooglePlayServicesUtil.getErrorDialog(status, context, 0).show();
             return false;
         }
+    }
+
+
+    public static final DisplayImageOptions MEMORY_CACHE_OPT = new DisplayImageOptions.Builder()
+            .cacheInMemory(true)
+            .cacheOnDisk(false)
+            .resetViewBeforeLoading(true)
+            .build();
+
+
+    public static final int getDistanceInMetres(final Location location, final double lat2, final double lng2) {
+        if(location!=null) {
+            float[] dist = new float[1];
+            Location.distanceBetween(location.getLatitude(), location.getLongitude(), lat2, lng2, dist);
+            return (int) dist[0];
+        }
+        return 0;
     }
 
 }

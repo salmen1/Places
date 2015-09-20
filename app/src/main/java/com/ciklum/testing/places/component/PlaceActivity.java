@@ -224,7 +224,7 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
 
     @Override
     public void onLoadFinished(Loader<ArrayList<Place>> loader, ArrayList<Place> data) {
-        mPlaceAdapter = new PlaceAdapter(data);
+        mPlaceAdapter = new PlaceAdapter(data, mCurrentLocation);
         mPlaceAdapter.notifyDataSetChanged();
         mRecycleView.setAdapter(mPlaceAdapter);
         mProgressView.setVisibility(View.GONE);
@@ -259,7 +259,7 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
         mKeyWordTextView.clearFocus();
         Loader<ArrayList<Place>> loaderPlace = getSupportLoaderManager().getLoader(LOADER_ID);
 
-        mPlaceAdapter.updateData(null);
+        mPlaceAdapter.updateData(null, mCurrentLocation);
         PlaceLoader placeLoader = (PlaceLoader) loaderPlace;
         placeLoader.updateRequestData(keyWord, mCurrentLocation);
         placeLoader.forceLoad();
