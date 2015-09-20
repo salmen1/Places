@@ -2,10 +2,13 @@ package com.ciklum.testing.places.component.data;
 
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.ArrayList;
 
 /**
  * @author Alexandr Stetsko (alexandr.stetsko@innomos.com)
@@ -33,6 +36,9 @@ public final class Place implements Parcelable {
 
     @Element(name = Keys.GEOMETRY)
     private PlaceLocation placelocation;
+
+    @ElementList(inline = true, name = "photo", required=false)
+    private ArrayList<Photo> photos;
 
     private int distance;
 

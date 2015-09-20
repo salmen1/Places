@@ -41,7 +41,7 @@ public final class PlaceProvider {
             places = response!=null?response.places:null;
 
             for (Place place : places) {
-                Log.i("test", "place: " + place + " \n");
+                Log.i(TAG, "place: " + place + " \n");
             }
         } catch (Exception e) {
             Log.i(TAG, "error getting data", e);
