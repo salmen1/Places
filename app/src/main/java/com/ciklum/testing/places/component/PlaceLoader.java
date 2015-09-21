@@ -1,15 +1,12 @@
 package com.ciklum.testing.places.component;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import com.ciklum.testing.places.Constants;
-import com.ciklum.testing.places.component.data.Place;
-import com.ciklum.testing.places.component.data.PlaceProvider;
+import com.ciklum.testing.places.data.Place;
+import com.ciklum.testing.places.data.PlaceProvider;
 
 import android.content.Context;
 import android.location.Location;
 import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 
 import java.util.ArrayList;
 

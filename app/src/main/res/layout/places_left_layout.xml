@@ -48,7 +48,7 @@
         android:padding="@dimen/places_inner_margin"
         android:text="@string/enter_a_keyword"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_22_sp_dimen" />
+        android:textSize="@dimen/text_size_18_sp_dimen" />
 
     <EditText
         android:id="@+id/edit_text_keyword"
@@ -96,6 +96,6 @@
         android:padding="@dimen/places_inner_margin"
         android:text="@string/places_search_label"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_24_sp_dimen" />
+        android:textSize="@dimen/text_size_20_sp_dimen" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 package com.ciklum.testing.places.component;
 
 import com.ciklum.testing.places.R;
-import com.ciklum.testing.places.component.data.Place;
+import com.ciklum.testing.places.data.Place;
 import com.ciklum.testing.places.utils.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -55,7 +55,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PlaceDetailsViewer.class);
+                Intent intent = new Intent(v.getContext(), PlaceDetailsViewerActivity.class);
                 intent.putExtra("place", place);
                 v.getContext().startActivity(intent);
             }

@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ciklum.testing.places.MainActivity"
+            android:name=".component.PlaceActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".component.PlaceActivity"/>
-        <activity android:name=".component.PlaceDetailsViewer"/>
+        <activity android:name=".component.PlaceDetailsViewerActivity"/>
 
         <!-- Google API Key -->
         <meta-data

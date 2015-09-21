@@ -1,7 +1,8 @@
 package com.ciklum.testing.places.component;
 
 import com.ciklum.testing.places.R;
-import com.ciklum.testing.places.component.data.Place;
+import com.ciklum.testing.places.component.PhotoAdapter;
+import com.ciklum.testing.places.data.Place;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.TextView;
  * @author Alexandr Stetsko (alexandr.stetsko@innomos.com)
  */
 
-public class PlaceDetailsViewer extends FragmentActivity {
+public class PlaceDetailsViewerActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

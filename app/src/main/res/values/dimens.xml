@@ -18,6 +18,11 @@
     <dimen name="text_size_24_sp_dimen">24sp</dimen>
     <dimen name="text_size_26_sp_dimen">26sp</dimen>
 
-    <dimen name="places_inner_margin">10dp</dimen>
-    <dimen name="places_map_height">300dp</dimen>
+    <dimen name="places_inner_margin">5dp</dimen>
+    <dimen name="places_map_height">120dp</dimen>
+    <dimen name="places_menu_width">150dp</dimen>
+
+    <dimen name="card_view_corner_radius">2dp</dimen>
+    <dimen name="card_view_content_padding">5dp</dimen>
+    <dimen name="card_view_item_margin">5dp</dimen>
 </resources>

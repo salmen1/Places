@@ -1,4 +1,4 @@
-package com.ciklum.testing.places.component.data;
+package com.ciklum.testing.places.data;
 
 import com.ciklum.testing.places.Constants;
 

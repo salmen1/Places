@@ -1,6 +1,5 @@
 package com.ciklum.testing.places;
 
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -8,9 +7,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Environment;
-
-import java.io.File;
 
 /**
  * @author Alexandr Stetsko (alexandr.stetsko@innomos.com)
@@ -18,7 +14,6 @@ import java.io.File;
 public class PlaceApplication extends Application {
 
     private static ImageLoaderConfiguration config;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,9 +21,8 @@ public class PlaceApplication extends Application {
         ImageLoader.getInstance().init(getConfig(getApplicationContext()));
     }
 
-    public static ImageLoaderConfiguration getConfig (Context context) {
-        if(config==null) {
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static ImageLoaderConfiguration getConfig(Context context) {
+        if (config == null) {
             config = new ImageLoaderConfiguration.Builder(context)
                     .threadPriority(Thread.NORM_PRIORITY - 2)
                     .denyCacheImageMultipleSizesInMemory()
@@ -42,6 +36,6 @@ public class PlaceApplication extends Application {
                     .tasksProcessingOrder(QueueProcessingType.LIFO)
                     .build();
         }
-        return  config;
+        return config;
     }
 }

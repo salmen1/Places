@@ -1,4 +1,4 @@
-package com.ciklum.testing.places.component.location;
+package com.ciklum.testing.places.location;
 
 import android.location.Address;
 

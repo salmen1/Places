@@ -18,13 +18,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.ciklum.testing.places.R;
-import com.ciklum.testing.places.component.data.Place;
-import com.ciklum.testing.places.component.location.GeocodeAsyncTask;
-import com.ciklum.testing.places.component.location.GeocodeResultListener;
+import com.ciklum.testing.places.data.Place;
+import com.ciklum.testing.places.location.GeocodeAsyncTask;
+import com.ciklum.testing.places.location.GeocodeResultListener;
 import com.ciklum.testing.places.ui.AutoFitRecyclerView;
 import com.ciklum.testing.places.utils.SimpleTextWatcher;
 import com.ciklum.testing.places.utils.Utils;
@@ -43,7 +41,6 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -98,7 +95,6 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
     private GoogleMap mMapView;
     private boolean mSkipAnimationToMyLocation = false;
 
-    private Button mSearchButton;
     private TextView mKeyWordTextView;
     private AutoFitRecyclerView mRecycleView;
     private View mProgressView;
@@ -108,6 +104,8 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
     private Address mAddress;
     private GeocodeAsyncTask mGeocodeAsyncTask;
     private PlaceAdapter mPlaceAdapter;
+
+    private View mLeftContainer;
 
 
     @Override
@@ -125,7 +123,6 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
         mProgressView      = findViewById(R.id.progress_view);
         mInfoView          = findViewById(R.id.info_view);
         mRecycleView       = (AutoFitRecyclerView)findViewById(R.id.recycler_view);
-        mSearchButton      = (Button)findViewById(R.id.search_button);
         initEditWidgets();
 
         mProgressView.setOnTouchListener(new View.OnTouchListener() {
@@ -139,6 +136,8 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
 
         mRecycleView.setHasFixedSize(false);
         mRecycleView.setAdapter(mPlaceAdapter);
+
+        mLeftContainer = findViewById(R.id.left_panel);
 
 
         final MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -234,18 +233,6 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
     }
 
 
-//    private void  addPlacesToMap(ArrayList<Place> places) {
-//        if(mMapView!=null) {
-//            mMapView.clear();
-//            if (places != null) {
-//                for (Place place : places) {
-//                    mMapView.addMarker(new MarkerOptions()
-//                            .position(new LatLng(place.getLocation().getLatitude(), place.getLocation().getLongitude()))
-//                            .draggable(false));
-//                }
-//            }
-//        }
-//    }
 
     /**
      * Call user when click by button search
