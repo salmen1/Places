@@ -76,6 +76,10 @@ public final class Place implements Parcelable {
         this.distance = distance;
     }
 
+    public ArrayList<Photo> getPhotos() {
+        return photos;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -89,6 +93,7 @@ public final class Place implements Parcelable {
         parcel.writeString(vicinity);
         parcel.writeInt(distance);
         parcel.writeParcelable(placelocation, flags);
+        parcel.writeList(photos);
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {
@@ -109,6 +114,7 @@ public final class Place implements Parcelable {
         vicinity = parcel.readString();
         distance = parcel.readInt();
         placelocation = parcel.readParcelable(PlaceLocation.class.getClassLoader());
+        photos = parcel.readArrayList(Photo.class.getClassLoader());
     }
 
 

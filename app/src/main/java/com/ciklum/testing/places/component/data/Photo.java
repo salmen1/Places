@@ -36,6 +36,18 @@ public class Photo implements Parcelable {
         this.height = height;
     }
 
+    public String getPhotoReference() {
+        return photoReference;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     @Override
     public int describeContents() {
         return 0;

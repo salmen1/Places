@@ -26,7 +26,7 @@
             android:layout_toRightOf="@+id/left_panel"
             android:background="@color/border_gray" />
 
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        <com.ciklum.testing.places.ui.AutoFitRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recycler_view"
             android:layout_toRightOf="@+id/divider"
             android:layout_width="match_parent"

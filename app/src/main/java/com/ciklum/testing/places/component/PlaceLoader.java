@@ -2,6 +2,7 @@ package com.ciklum.testing.places.component;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import com.ciklum.testing.places.Constants;
 import com.ciklum.testing.places.component.data.Place;
 import com.ciklum.testing.places.component.data.PlaceProvider;
 
@@ -17,11 +18,11 @@ import java.util.ArrayList;
  */
 final class PlaceLoader extends AsyncTaskLoader<ArrayList<Place>> {
 
-    private static final String PLACES_API_KEY = "&key=AIzaSyBoWumOllMz-BAdHhgt0YCxNoyTOtx4tRQ";
+    private static final String PLACES_API_KEY = "&key="+ Constants.PLACES_API_KEY;
     private static final String REQUEST_KEYWORD = "&keyword=%s";
     private static final String REQUEST_LOCATION = "&location=%s";
     private static final String REQUEST_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/xml?"
-            + "rankby=distance&types=food";
+            + "rankby=distance&types=establishment";
 
     private String mKeyWord;
     private Location mLocation;
@@ -74,8 +75,6 @@ final class PlaceLoader extends AsyncTaskLoader<ArrayList<Place>> {
         }
 
         url += PLACES_API_KEY;
-
-        Log.i("test", "url: " + url);
 
         return url;
     }

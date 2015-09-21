@@ -19,4 +19,5 @@
     <dimen name="text_size_26_sp_dimen">26sp</dimen>
 
     <dimen name="places_inner_margin">10dp</dimen>
+    <dimen name="places_map_height">300dp</dimen>
 </resources>

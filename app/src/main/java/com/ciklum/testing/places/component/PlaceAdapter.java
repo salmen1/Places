@@ -5,6 +5,7 @@ import com.ciklum.testing.places.component.data.Place;
 import com.ciklum.testing.places.utils.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.content.Intent;
 import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
 
     @Override
     public void onBindViewHolder(PlaceViewHolder holder, int position) {
-        Place place = mData.get(position);
+        final Place place = mData.get(position);
         holder.addressTextView.setText(place.getVicinity());
         holder.nameTextView.setText(place.getName());
         ImageLoader.getInstance().displayImage(place.getIcon(), holder.photoTextView, Utils.MEMORY_CACHE_OPT);
@@ -50,6 +51,15 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceViewHolder> {
             place.setDistance(distance);
         }
         holder.distanceTextView.setText(String.valueOf(place.getDistance()) + " m");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PlaceDetailsViewer.class);
+                intent.putExtra("place", place);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
