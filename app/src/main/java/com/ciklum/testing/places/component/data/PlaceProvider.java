@@ -39,10 +39,9 @@ public final class PlaceProvider {
             PlaceSearchResponse response = serializer.read(PlaceSearchResponse.class, con.getInputStream());
 
             places = response!=null?response.places:null;
-
-            for (Place place : places) {
-                Log.i(TAG, "place: " + place + " \n");
-            }
+//            for (Place place : places) {
+//                Log.i(TAG, "place: " + place + " \n");
+//            }
         } catch (Exception e) {
             Log.i(TAG, "error getting data", e);
         }

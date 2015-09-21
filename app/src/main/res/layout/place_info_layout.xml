@@ -18,6 +18,8 @@
         android:textSize="@dimen/text_size_22_sp_dimen"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/contact_info_image"/>
+        android:layout_below="@+id/contact_info_image"
+        android:text="@string/places_not_found"
+            />
 
 </RelativeLayout>

@@ -27,6 +27,7 @@ import com.ciklum.testing.places.component.location.GeocodeAsyncTask;
 import com.ciklum.testing.places.component.location.GeocodeResultListener;
 import com.ciklum.testing.places.ui.AutoFitRecyclerView;
 import com.ciklum.testing.places.utils.SimpleTextWatcher;
+import com.ciklum.testing.places.utils.Utils;
 
 import android.content.IntentSender;
 import android.gesture.Gesture;
@@ -57,13 +58,7 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
 
     protected static final String TAG = PlaceActivity.class.getSimpleName();
 
-    public static final  String ActionContactsType = "contacts_extended_action_type";
 
-    interface InfoType {
-        int None              = 100;
-        int NoResults         = 101;
-        int NoConnection      = 102;
-    }
     private static final int LOADER_ID = 1015;
 
     /**
@@ -132,8 +127,6 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
         mRecycleView       = (AutoFitRecyclerView)findViewById(R.id.recycler_view);
         mSearchButton      = (Button)findViewById(R.id.search_button);
         initEditWidgets();
-
-        mInfoView.setTag(InfoType.None);
 
         mProgressView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -230,6 +223,9 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
         mPlaceAdapter.notifyDataSetChanged();
         mRecycleView.setAdapter(mPlaceAdapter);
         mProgressView.setVisibility(View.GONE);
+        if(data==null || data.isEmpty()) {
+            showInfoMessage(true);
+        }
     }
 
     @Override
@@ -256,19 +252,24 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
      * @param view in layout
      */
     public void onSearchClick(View view) {
+        boolean isNetworkAvailable = Utils.isNetworkAvailable(getApplicationContext());
 
-        mProgressView.setVisibility(View.VISIBLE);
-        hideInfoMessage();
+        if(isNetworkAvailable) {
+            mProgressView.setVisibility(View.VISIBLE);
+            mInfoView.setVisibility(View.GONE);
 
-        String keyWord = mKeyWordTextView.getText()!=null?mKeyWordTextView.getText().toString():null;
+            String keyWord = mKeyWordTextView.getText() != null ? mKeyWordTextView.getText().toString() : null;
 
-        mKeyWordTextView.clearFocus();
-        Loader<ArrayList<Place>> loaderPlace = getSupportLoaderManager().getLoader(LOADER_ID);
+            mKeyWordTextView.clearFocus();
+            Loader<ArrayList<Place>> loaderPlace = getSupportLoaderManager().getLoader(LOADER_ID);
 
-        mPlaceAdapter.updateData(null, mCurrentLocation);
-        PlaceLoader placeLoader = (PlaceLoader) loaderPlace;
-        placeLoader.updateRequestData(keyWord, mCurrentLocation);
-        placeLoader.forceLoad();
+            mPlaceAdapter.updateData(null, mCurrentLocation);
+            PlaceLoader placeLoader = (PlaceLoader) loaderPlace;
+            placeLoader.updateRequestData(keyWord, mCurrentLocation);
+            placeLoader.forceLoad();
+        }else {
+            showInfoMessage(false);
+        }
     }
 
     /**
@@ -433,6 +434,29 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
         mGoogleApiClient.disconnect();
     }
 
+    private void showInfoMessage(boolean noResults) {
+        ImageView infoImageView = ((ImageView) mInfoView.findViewById(R.id.contact_info_image));
+        TextView infoMessageView = ((TextView) mInfoView.findViewById(R.id.contact_info_text));
+        int idText = 0, idImage = 0;
+
+
+        if(noResults) {
+            idImage = R.drawable.no_results_icon;
+            idText = R.string.places_not_found;
+        }else {
+            idText  = R.string.no_connection;
+            idImage = R.drawable.network_error_icon;
+        }
+
+        if(idText>0) {
+            infoMessageView.setText(idText);
+        }
+        if(idImage>0) {
+            infoImageView.setImageResource(idImage);
+        }
+        mInfoView.setVisibility(View.VISIBLE);
+    }
+
     /**
      * Runs when a GoogleApiClient object successfully connects.
      */
@@ -474,45 +498,6 @@ public class PlaceActivity extends FragmentActivity implements ConnectionCallbac
     @Override
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-    }
-
-    private void showInfoMessage(int type) {
-        ImageView infoImageView = ((ImageView) mInfoView.findViewById(R.id.contact_info_image));
-        TextView infoMessageView = ((TextView) mInfoView.findViewById(R.id.contact_info_text));
-        int idText = 0, idImage = 0;
-
-
-        switch (type) {
-            case InfoType.NoResults:
-                idText = R.string.places_not_found;
-                idImage = R.drawable.no_results_icon;
-                break;
-            case InfoType.NoConnection:
-                idText = R.string.no_connection;
-                idImage = R.drawable.network_error_icon;
-                break;
-        }
-
-
-
-        if(idText>0) {
-            infoMessageView.setText(idText);
-        }
-        if(idImage>0) {
-            infoImageView.setImageResource(idImage);
-        }
-
-        mInfoView.setTag(type);
-        if(type!=InfoType.None) {
-            mInfoView.setVisibility(View.VISIBLE);
-        }else{
-            mInfoView.setVisibility(View.GONE);
-        }
-    }
-
-    private void hideInfoMessage() {
-        mInfoView.setTag(InfoType.None);
-        mInfoView.setVisibility(View.GONE);
     }
 
 
